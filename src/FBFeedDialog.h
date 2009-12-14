@@ -14,7 +14,7 @@
  * limitations under the License.
 */
 
-#import "FBConnect/FBDialog.h"
+#import "FBDialog.h"
 
 @interface FBFeedDialog : FBDialog {
   long long _templateBundleId;

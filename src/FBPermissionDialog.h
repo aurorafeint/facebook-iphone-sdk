@@ -14,26 +14,18 @@
  * limitations under the License.
 */
 
-#import "FBConnect/FBConnect.h"
+#import "FBLoginDialog.h"
 
-@class FBSession;
-
-@interface SessionViewController : UIViewController
-    <FBDialogDelegate, FBSessionDelegate, FBRequestDelegate> {
-  IBOutlet UILabel* _label;
-  IBOutlet UIButton* _permissionButton;
-  IBOutlet UIButton* _feedButton;
-  IBOutlet UIButton* _statusButton;
-  IBOutlet UIButton* _photoButton;
-  IBOutlet FBLoginButton* _loginButton;
-  FBSession* _session;
+@interface FBPermissionDialog : FBLoginDialog {
+  NSString* _permission;
+  NSTimer* _redirectTimer;
 }
 
-@property(nonatomic,readonly) UILabel* label;
-
-- (void)askPermission:(id)target;
-- (void)publishFeed:(id)target;
-- (void)setStatus:(id)target;
-- (void)uploadPhoto:(id)target;
+/**
+ * The extended permission to request.
+ *
+ * See http://wiki.developers.facebook.com/index.php/Extended_permissions
+ */
+@property(nonatomic,copy) NSString* permission;
 
 @end

@@ -14,16 +14,10 @@
  * limitations under the License.
 */
 
-#import <UIKit/UIKit.h>
-
-@class SessionViewController;
-
-@interface ConnectAppDelegate : NSObject <UIApplicationDelegate> {
-  IBOutlet UIWindow *window;
-  SessionViewController* controller;
-}
-
-@property(nonatomic,retain) UIWindow *window;
-
-@end
-
+#import "FBSession.h"
+#import "FBRequest.h"
+#import "FBLoginButton.h"
+#import "FBLoginDialog.h"
+#import "FBPermissionDialog.h"
+#import "FBFeedDialog.h"
+#import "FBStreamDialog.h"
