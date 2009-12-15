@@ -56,7 +56,8 @@ static NSString* kLoginURL = @"http://www.facebook.com/login.php";
 // NSObject
 
 - (id)initWithSession:(FBSession*)session {
-  if (self = [super initWithSession:session]) {
+  self = [super initWithSession:session];
+  if (self != nil) {
     _getSessionRequest = nil;
   }
   return self;

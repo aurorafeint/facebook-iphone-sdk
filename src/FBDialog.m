@@ -16,6 +16,7 @@
 
 #import "FBDialog.h"
 #import "FBSession.h"
+#import "NSObject+WeakLinking.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // global
@@ -98,23 +99,31 @@ static CGFloat kBorderWidth = 10;
   CGContextSetLineWidth(context, 1.0);
     
   {
-    CGPoint points[] = {rect.origin.x+0.5, rect.origin.y-0.5,
-      rect.origin.x+rect.size.width, rect.origin.y-0.5};
+    CGPoint points[] = {
+		{ rect.origin.x+0.5, rect.origin.y-0.5 },
+		{ rect.origin.x+rect.size.width, rect.origin.y-0.5 }
+	};
     CGContextStrokeLineSegments(context, points, 2);
   }
   {
-    CGPoint points[] = {rect.origin.x+0.5, rect.origin.y+rect.size.height-0.5,
-      rect.origin.x+rect.size.width-0.5, rect.origin.y+rect.size.height-0.5};
+    CGPoint points[] = {
+		{ rect.origin.x+0.5, rect.origin.y+rect.size.height-0.5 },
+		{ rect.origin.x+rect.size.width-0.5, rect.origin.y+rect.size.height-0.5 }
+	};
     CGContextStrokeLineSegments(context, points, 2);
   }
   {
-    CGPoint points[] = {rect.origin.x+rect.size.width-0.5, rect.origin.y,
-      rect.origin.x+rect.size.width-0.5, rect.origin.y+rect.size.height};
+    CGPoint points[] = {
+		{ rect.origin.x+rect.size.width-0.5, rect.origin.y },
+		{ rect.origin.x+rect.size.width-0.5, rect.origin.y+rect.size.height }
+	};
     CGContextStrokeLineSegments(context, points, 2);
   }
   {
-    CGPoint points[] = {rect.origin.x+0.5, rect.origin.y,
-      rect.origin.x+0.5, rect.origin.y+rect.size.height};
+    CGPoint points[] = {
+		{ rect.origin.x+0.5, rect.origin.y },
+		{ rect.origin.x+0.5, rect.origin.y+rect.size.height}
+	};
     CGContextStrokeLineSegments(context, points, 2);
   }
   
@@ -294,7 +303,8 @@ static CGFloat kBorderWidth = 10;
 }
 
 - (id)initWithSession:(FBSession*)session {
-  if (self = [super initWithFrame:CGRectZero]) {
+  self = [super initWithFrame:CGRectZero];
+  if (self != nil) {
     _delegate = nil;
     _session = [session retain];
     _loadingURL = nil;
@@ -319,7 +329,7 @@ static CGFloat kBorderWidth = 10;
     [_closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [_closeButton addTarget:self action:@selector(cancel)
       forControlEvents:UIControlEventTouchUpInside];
-    _closeButton.font = [UIFont boldSystemFontOfSize:12];
+	[_closeButton trySet:@"titleLabel.font" elseSet:@"font" with:[UIFont boldSystemFontOfSize:12]];
     _closeButton.showsTouchWhenHighlighted = YES;
     _closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin
       | UIViewAutoresizingFlexibleBottomMargin;

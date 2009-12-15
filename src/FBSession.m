@@ -166,7 +166,8 @@ static FBSession* sharedSession = nil;
 
 - (FBSession*)initWithKey:(NSString*)key secret:(NSString*)secret
     getSessionProxy:(NSString*)getSessionProxy {
-  if (self = [super init]) {
+  self = [super init];
+  if (self != nil) {
     if (!sharedSession) {
       sharedSession = self;
     }

@@ -53,7 +53,9 @@
 
 - (void)flushCharacters {
   NSCharacterSet* whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  for (NSInteger i = 0; i < _chars.length; ++i) {
+  // @BEN - moved declaration of i outside of loop so that we can compile without -std=c99.  Sorry!
+  NSInteger i;
+  for (i = 0; i < _chars.length; ++i) {
     unichar c = [_chars characterAtIndex:i];
     if (![whitespace characterIsMember:c]) {
       id topContainer = self.topContainer;
@@ -75,7 +77,8 @@
 // NSObject
 
 - (id)init {
-  if (self = [super init]) {
+  self = [super init];
+  if (self != nil) {
     _stack = [[NSMutableArray alloc] init];
     _nameStack = [[NSMutableArray alloc] init];
     _rootObject = nil;
