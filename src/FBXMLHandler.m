@@ -54,7 +54,7 @@
 - (void)flushCharacters {
   NSCharacterSet* whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   // @BEN - moved declaration of i outside of loop so that we can compile without -std=c99.  Sorry!
-  NSInteger i;
+  NSUInteger i;
   for (i = 0; i < _chars.length; ++i) {
     unichar c = [_chars characterAtIndex:i];
     if (![whitespace characterIsMember:c]) {
